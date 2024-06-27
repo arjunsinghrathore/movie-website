@@ -12,7 +12,7 @@ const Homepage = () => {
       try {
         const response = await axios.get('https://api.themoviedb.org/3/movie/popular', {
           params: {
-            api_key: 'eb68df79f85ff939795935563a97cef5'
+            api_key: 'YOUR_TMDB_API_KEY'
           }
         });
         setMovies(response.data.results);
