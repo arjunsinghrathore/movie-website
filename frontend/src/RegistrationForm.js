@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom'; // Import Link for navigation
 
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
@@ -42,13 +43,16 @@ const RegistrationForm = () => {
     }
     setIsLoading(true);
     try {
-      // eslint-disable-next-line no-unused-vars
-      const response = await axios.post('http://localhost:5000/api/register', formData);
+      const response = await axios.post('http://localhost:5001/api/register', formData); // Use localhost for local testing
       setSuccessMessage('Registration successful!');
       setFormData({ username: '', email: '', password: '', confirmPassword: '' });
       setIsLoading(false);
     } catch (error) {
-      setErrors({ apiError: 'Registration failed. Please try again.' });
+      if (error.response && error.response.data) {
+        setErrors({ apiError: error.response.data });
+      } else {
+        setErrors({ apiError: 'Registration failed. Please try again.' });
+      }
       setIsLoading(false);
     }
   };
@@ -102,6 +106,7 @@ const RegistrationForm = () => {
         {successMessage && <p>{successMessage}</p>}
         {errors.apiError && <p>{errors.apiError}</p>}
       </form>
+      <p>Already have an account? <Link to="/">Go to homepage</Link></p> {/* Add navigation link */}
     </div>
   );
 };

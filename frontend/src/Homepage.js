@@ -12,7 +12,7 @@ const Homepage = () => {
       try {
         const response = await axios.get('https://api.themoviedb.org/3/movie/popular', {
           params: {
-            api_key: 'YOUR_TMDB_API_KEY'
+            api_key: 'eb68df79f85ff939795935563a97cef5'
           }
         });
         setMovies(response.data.results);
@@ -34,12 +34,12 @@ const Homepage = () => {
             <Nav className="me-auto">
               <Nav.Link as={Link} to="/">Home</Nav.Link>
               <Nav.Link as={Link} to="/register">Register</Nav.Link>
+              <Nav.Link as={Link} to="/login">Login</Nav.Link> {/* Add Login link */}
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
       <Container className="mt-4">
-        {/* <h1>Welcome to CineConnect</h1> */}
         {movies.length > 0 && (
           <Carousel>
             {movies.map((movie) => (
